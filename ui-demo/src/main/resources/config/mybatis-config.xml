@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD SQL Map Config 3.0//EN"  
+	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<setting name="cacheEnabled" value="false" />
+		<setting name="useGeneratedKeys" value="true" />
+		<setting name="defaultExecutorType" value="REUSE" />
+		<!--配置实体类与数据库字段驼峰命名-->
+      	<setting name="mapUnderscoreToCamelCase" value="true"/>
+      	<!-- 配置控制台打印sql -->
+      	<setting name="logImpl" value="STDOUT_LOGGING" />
+	</settings>
+
+	<!-- 因为在spring-mybatis.xml中配置sqlSessionFactory时配置了<property name="typeAliasesPackage" value="com.pf.demo.entity"></property>
+		所以这里可以不用在配置typeAliases
+	 -->
+	<!-- <typeAliases>
+		<typeAlias type="com.pf.demo.entity.User" alias="User"/>
+	</typeAliases> -->
+	
+	
+	<plugins>
+		<!-- 这个是mybatis-paginator的分页插件的用法 -->
+		<!-- <plugin interceptor="com.github.miemiedev.mybatis.paginator.OffsetLimitInterceptor">
+			<property name="dialect" value="mysql" />
+			<property name="pageSqlId" value="ByPage" />
+		</plugin> -->
+		
+		<!-- 我们这里使用pagehelper插件进行mybatis的分页 -->
+		<plugin interceptor="com.github.pagehelper.PageInterceptor">
+	         <!-- 设置数据库类型 Oracle,Mysql,MariaDB,SQLite,Hsqldb,PostgreSQL六种数据库-->
+            <property name="helperDialect" value="mysql"/>
+	    </plugin>
+	</plugins>
+
+</configuration>	
+	

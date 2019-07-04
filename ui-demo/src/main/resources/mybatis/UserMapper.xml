@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pf.mapper.UserMapper">
+	<resultMap type="com.pf.entity.User" id="baseColumnMap">
+		<id property="userId" column="user_id" jdbcType="INTEGER"/>
+		<result property="userName" column="user_name" jdbcType="VARCHAR"/>
+		<result property="userPasswd" column="user_passwd" jdbcType="VARCHAR"/>
+		<result property="isState" column="is_state" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	<sql id="base_column_list">
+		user_id,user_name,user_passwd,is_state
+	</sql>
+</mapper>
