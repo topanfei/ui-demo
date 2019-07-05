@@ -13,10 +13,9 @@
     			    closeWindow: function(index){ //关闭弹窗
     				   layer.close(index);
     			    },
+    			    /**关闭所有弹窗*/
     			    closeAllWindow:function(){
-    			    	for (var i in arguments) {
-    						top.layer.close(arguments[i]);
-    					}
+    			    	layer.closeAll();
     			    },
     			    
     			    /**
@@ -36,6 +35,8 @@
     						icon: 0 //0：警告；1：成功；2：错误；3：疑问；4：锁定；5：哭脸；6：笑脸；
     						,title: '信息' //标题
     						,shade: [0.1,'#000'] //遮罩层
+    						,offset: 'auto' //默认垂直水平居中 't':顶部坐标；'r':右边缘坐标；'b':底部坐标；'l':左边缘坐标；'lt'：左上角；'lb'：左下角；'rt'：右上角；'rb':右下角 ；'100px':指定义垂直坐标，水平居中；['100px','100px']:水平垂直都是100
+    						,anim: 0 //0-6的动画形式，-1不开启
     						,shadeClose: false //是否点击遮罩关闭，默认不关闭
     						,yes: yesFunc //确定按钮回调函数
     						,cancel: cancelFunc //右上角关闭按钮触发回调函数
@@ -99,12 +100,37 @@
     				    var defaults = {
 	    					//icon:  //0：警告；1：成功；2：错误；3：疑问；4：锁定；5：哭脸；6：笑脸； 
 	    					time: false //如果time值设置为false，则层不会关闭，需要手动关闭，所以该方法将遮罩层序号返回。也可以设置毫秒数
+	    					,offset: 'auto' //默认垂直水平居中 't':顶部坐标；'r':右边缘坐标；'b':底部坐标；'l':左边缘坐标；'lt'：左上角；'lb'：左下角；'rt'：右上角；'rb':右下角 ；'100px':指定义垂直坐标，水平居中；['100px','100px']:水平垂直都是100
 	    					,shade:[0.5,'#393D49'] //遮罩层
 	    					,shadeClose: false //是否点击遮罩关闭，默认不关闭
 	    					,end: endFunc //层销毁后的回调函数
     				    };
     				    opts = $.extend(defaults,opts);
     				    return top.layer.msg(msg,opts); //这里因为页面是用iframe嵌套着，所以使用top或者parent去调用layer.msg就可以
+    			    },
+    			   
+    			    /**
+    			     * 打开窗口页面
+    			     * url：打开页面的url地址
+    			     * opts：拓展配置信息
+    			     */
+    			    open: function(url,opts){
+    				    var defaults = {
+	    					type: 2 //0：信息框；1：页面层；2：iframe层；3：加载层；4：tips层
+	    					,title: '信息'
+	    					,closeBtn : 1 //默认值为1 。可通过配置1和2来展示，如果不显示，在设置值为0
+	    					,content:url //页面地址
+	    					,area: [window.screen.width / 2 + 'px', window.screen.height / 2 + 'px'] //宽高
+	    					,shade: [0.1,'#000']
+	    					,maxmin: true //允许全屏最小化
+	    					,offset: 'auto' //默认垂直水平居中 't':顶部坐标；'r':右边缘坐标；'b':底部坐标；'l':左边缘坐标；'lt'：左上角；'lb'：左下角；'rt'：右上角；'rb':右下角 ；'100px':指定义垂直坐标，水平居中；['100px','100px']:水平垂直都是100
+	    					,scrollbar:true //默认允许浏览器滚动
+	    					,shadeClose:false //设置点击遮罩层不关闭弹窗
+	    					,anim: 1 //0-6的动画形式，-1不开启
+	    					,success: null //弹出层弹出后的回调函数
+    				    }
+    				    opts = $.extend(defaults,opts);
+    				    layer.open(opts);
     			    },
     			    /**
     			     * ajax请求
@@ -139,26 +165,6 @@
     				    };
     				    opts = $.extend(defaults,opts);
     				    $.ajax(opts);
-    			    },
-    			    /**
-    			     * 打开窗口页面
-    			     * url：打开页面的url地址
-    			     * opts：拓展配置信息
-    			     */
-    			    open: function(url,opts){
-    				    var defaults ={
-    					type: 2 //0：信息框；1：页面层；2：iframe层；3：加载层；4：tips层
-    					,title: '信息'
-    					,content:url //页面地址
-    					,area: [window.screen.width / 2 + 'px', window.screen.height / 2 + 'px'] //宽高
-    					,shade: [0.1,'#000']
-    					,maxmin: true
-    					,scrollbar:false //屏蔽滚动条
-    					,shadeClose:false //设置点击遮罩层不关闭弹窗
-    					,success: null //弹出层弹出后的回调函数
-    				    }
-    				    opts = $.extend(defaults,opts);
-    				    layer.open(opts);
     			    },
     			    /**
     			     * 上传文件
