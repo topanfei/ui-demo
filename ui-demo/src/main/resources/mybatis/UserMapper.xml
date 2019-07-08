@@ -11,4 +11,9 @@
 	<sql id="base_column_list">
 		user_id,user_name,user_passwd,is_state
 	</sql>
+	
+	<select id="getUserList" resultMap="com.pf.mapper.UserMapper">
+		select <include refid="base_column_list"/>
+		from user 
+	</select>
 </mapper>

@@ -30,7 +30,7 @@
 		<!-- 我们这里使用pagehelper插件进行mybatis的分页 -->
 		<plugin interceptor="com.github.pagehelper.PageInterceptor">
 	         <!-- 设置数据库类型 Oracle,Mysql,MariaDB,SQLite,Hsqldb,PostgreSQL六种数据库-->
-            <property name="helperDialect" value="mysql"/>
+            <property name="helperDialect" value="Mysql"/>
 	    </plugin>
 	</plugins>
 

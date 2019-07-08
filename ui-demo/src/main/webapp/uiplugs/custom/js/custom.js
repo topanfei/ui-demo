@@ -165,30 +165,6 @@
     				    };
     				    opts = $.extend(defaults,opts);
     				    $.ajax(opts);
-    			    },
-    			    /**
-    			     * 上传文件
-    			     */
-    			    uploadFile: function(opts){
-    				    var defaults = {
-	    					elem: '' //容器选择器，也可以是DOM对象
-	    					,accept: 'file' //images：图片；file：所有文件；video：视频；audio：音频
-	    					,exts: '' //允许上传的文件后缀，如 jpg|png|gif
-	    					,size: 4096//最大支持4M。设置最大可允许的大小，单位为kb
-	    					,multiple: false //是否允许多文件上传，默认不允许多文件上传
-	    					,number: 0 //设置同时上传的数量，一般配合multiple参数出现
-	    					,url: '' //服务端上传接口
-	    					,data:null //传递的参数
-	    					,before: null //文件提交上传前的回调函数
-	    					,done: null //执行上传请求成功的回调函数
-	    					,error: null //执行上传请求异常的回调函数
-    				    };
-    				    
-    				    opts = $.extend(defaults,opts);
-    				    layui.use(['upload'],function(){
-	    					var upload = layui.upload;
-	    					var uploadInst = upload.render(opts);
-    				    });
     			    }
     			    
     		};
